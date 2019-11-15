@@ -55,7 +55,7 @@ This project is still on very early development stage. If you want to use for pr
 * Then install React Native https://redux.js.org/
 * Then install image-picker https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Install.md
 * Then install image-slider-show https://www.npmjs.com/package/react-native-image-slider-show
-* Don’t forget Meteor Js as the backend https://nodejs.org/en/
+* Don’t forget Node Js as the backend https://nodejs.org/en/
 
 ## Installation & Configuration
 Follow these step to install
@@ -76,8 +76,8 @@ export const meteorUri = ‘ws://localhost:3000/websocket’;
 **Back-end:**
 ```
 $ cd course-repo-example/backend
-$ meteor npm install
-$ meteor #run your meteor on http://localhost:3000
+$ express npm install
+$ express #run your express on http://localhost:3000
 ```
 
 ## Support Me :)
