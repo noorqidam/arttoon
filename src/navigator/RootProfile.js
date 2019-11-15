@@ -7,10 +7,10 @@ import {
 import ImagePicker from 'react-native-image-picker';
 
 import ContainProfile from './../components/ContainProfile';
-
+import Icons from 'react-native-vector-icons/AntDesign'
 import { connect } from 'react-redux'
 import * as actionUsers from './../redux/actions/actionUsers'
-const Backgound = require('./../images/background2.jpeg');
+const Backgound = require('./../images/background.jpg');
 
 
 class RootProfile extends Component {
@@ -21,10 +21,11 @@ class RootProfile extends Component {
       icon: 'create',
 
       name: 'Your name',
-      filePath: { uri: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png' },
+      filePath: { uri: 'https://www.logolynx.com/images/logolynx/03/039b004617d1ef43cf1769aae45d6ea2.png' },
       isEdit: false
     }
   }
+
   chooseFile = () => {
     var options = {
       title: 'Select Image',
@@ -118,7 +119,7 @@ class RootProfile extends Component {
                   <Text style={styles.allText}>My Webtoon Creation</Text>
                 </Left>
                 <Right>
-                  <Icon name="arrow-forward" />
+                  <Icons style={{ fontSize: 30, color: '#4a3b3b' }} name="rightcircle" />
                 </Right>
               </ListItem>
               <ListItem selected onPress={() => this.handleLogout()}>
@@ -160,9 +161,9 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     padding: 4,
   },
-  Backgound:{
-    width: Dimensions.get('window').width, 
-    height: Dimensions.get('window').height, 
+  Backgound: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
     borderWidth: 2,
     borderColor: 'black',
     alignContent: 'center'
@@ -174,14 +175,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10
   },
   allText: {
     fontSize: 20,
     color: 'white',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
+    textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10
   },
   ProfileImage: {
@@ -194,6 +195,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textInputBox: {
+    marginTop: 20,
     width: 200,
     height: 50,
     backgroundColor: 'white',
@@ -201,13 +203,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 20,
-    fontSize: 20,
     textAlign: 'center',
   },
   Header: {
-    backgroundColor: '#E3608A',
+    backgroundColor: '#4a3b3b',
   },
-
 })
 
 

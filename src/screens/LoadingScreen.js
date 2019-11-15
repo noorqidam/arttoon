@@ -6,8 +6,8 @@ export default class LoadingScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
-  timePassed: false
+
+      timePassed: false
     };
   }
 
@@ -16,22 +16,22 @@ export default class LoadingScreen extends Component {
     if (token !== null) {
       this.props.navigation.navigate('BottomTabNav')
     }
-    else{
-        this.props.navigation.navigate('Login')
+    else {
+      this.props.navigation.navigate('Login')
     }
   }
 
- async UNSAFE_componentWillMount(){
-     await this.passLogin()
+  async UNSAFE_componentWillMount() {
+    await this.passLogin()
   }
 
   render() {
 
     return (
-        <Image 
-        source={{uri: 'https://raw.githubusercontent.com/DumbWaysStudent/DW12ROIHK_webtoon/implementasi_backend/src/images/loading.jpeg'}} 
-        style={{ flex: 1}}/>
- 
+      <Image
+        source={require('../images/loadinglogo.png')}
+        style={{ flex: 1 }} />
+
     );
   }
 }

@@ -47,12 +47,12 @@ export default class EditProfile extends Component {
   render() {
     return (
       <View style={styles.ProfileForm}>
-
         <Button transparent bordered rounded style={styles.ProfileImage}
           title='Choose File'
           onPress={this.chooseFile.bind(this)} >
           <Thumbnail style={styles.ProfileImage}
-            source={{ uri: this.state.filePath.uri }} /></Button>
+            source={{ uri: this.state.filePath.uri }} />
+        </Button>
       </View>
     );
   }
@@ -74,11 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: 150 / 2,
   },
   ProfileForm: {
-    marginTop: 50,
+    marginTop: 70,
     alignItems: 'center'
   },
-  textInput: {
-    width: 200,
-    height: 50,
-  }
 })

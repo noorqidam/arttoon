@@ -67,14 +67,14 @@ class Detail extends Component {
           </Body>
           <Right>
             <Button transparent>
-              <Icon name='share-alt'
+              <Icon name='share'
                 onPress={() => this.onClick()} />
             </Button>
           </Right>
         </Header>
         <Content style={styles.container}>
           <Image
-            style={{ width: 400, height: 150 }}
+            style={{ width: 400, height: 200 }}
             source={{ uri: this.state.cover.image }} />
           <SafeAreaView style={styles.form}>
             <FlatList
@@ -82,7 +82,8 @@ class Detail extends Component {
               renderItem={({ item }) =>
                 <ListItem thumbnail onPress={() => this.handleDetailEp(item)}>
                   <Button transparent >
-                    <Thumbnail square source={{ uri: item.image }} /></Button>
+                    <Thumbnail square large source={{ uri: item.image }} />
+                  </Button>
                   <Body>
                     <Text>{item.title}</Text>
                     <Text note numberOfLines={1}>{item.date}</Text>
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     width: 250,
   },
   Header: {
-    backgroundColor: '#E3608A',
+    backgroundColor: '#4a3b3b',
   },
 })
 

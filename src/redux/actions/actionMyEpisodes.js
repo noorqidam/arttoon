@@ -40,7 +40,7 @@ export const handleUpdateMyEpisodes = (param) => ({
   type: types.DELETE_MY_EPISODES,
   payload: axios({
     method: 'PATCH',
-    url: `http://192.168.0.23:5000/api/v1/user/${param.user}
+    url: `https://restapi-arttoon.herokuapp.com/api/v1/user/${param.user}
     /webtoon/${param.webtoon}/episode/${param.episode}`,
     headers: {
       Authorization: `bearer ${param.token}`

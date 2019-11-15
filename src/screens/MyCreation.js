@@ -33,7 +33,7 @@ class MyCreation extends Component {
 
   handleEditWebtoon(item) {
     console.log(item);
-    
+
     this.props.navigation.navigate('EditWebtoon', { webtoon: item })
   }
 
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 10
   },
   Header: {
-    backgroundColor: '#E3608A',
+    backgroundColor: '#4a3b3b',
   },
   Card: {
     alignSelf: 'center',

@@ -1,7 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
-import { Container, Content, Body, Item, 
-  Button, Input, Icon, List, Thumbnail, ListItem, Card, Header, Spinner } from 'native-base'
+import {
+  Container, Content, Body, Item,
+  Button, Input, Icon, List, Thumbnail, ListItem, Card, Header, Spinner
+} from 'native-base'
 
 
 import { connect } from 'react-redux'
@@ -12,10 +14,9 @@ class MyFavorite extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //test : this.props.navigation.favorite,
       arrayholder: [],
       data: [],
-      param:[],
+      param: [],
     };
   }
 
@@ -23,11 +24,6 @@ class MyFavorite extends React.Component {
     this.props.navigation.navigate('Detail')
   }
 
-  // UNSAFE_componentDidMount() {
-  //   //const { favorite } = this.props.navigation.state.params;
-  //   //this.setState({banners: favorite})
-  //   this.setState({ arrayholder: this.state.banners })
-  // }
   UNSAFE_componentWillMount() {
     this.getFavorite()
   }
@@ -37,16 +33,16 @@ class MyFavorite extends React.Component {
       token: await AsyncStorage.getItem('token'),
       user: await AsyncStorage.getItem('userId')
     }
-    await this.setState({param: param})
+    await this.setState({ param: param })
     console.log('here');
-    
     await this.getData()
   }
+
   async getData() {
     await this.props.handleGetFavorites(this.state.param)
     await this.setState({ data: this.props.favoritesLocal.favorites.data })
-  
   }
+
   async deleteFavorite(id) {
     let param = {
       token: this.state.param.token,
@@ -58,17 +54,15 @@ class MyFavorite extends React.Component {
     console.log('done delete');
   }
 
-  // searchFilterFunction = text => {
-  //   const newData = this.state.arrayholder.filter((item) => {
-  //     const itemData = item.title.toUpperCase();
-  //     const textData = text.toUpperCase();
+  searchFilterFunction = text => {
+    const newData = this.state.arrayholder.filter((item) => {
+      const itemData = item.title.toUpperCase();
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    this.setState({ banners: newData });
+  };
 
-  //     return itemData.indexOf(textData) > -1;
-
-  //   });
-
-  //   this.setState({ banners: newData });
-  // };
 
   render() {
     if (this.props.favoritesLocal.isLoading) {
@@ -82,18 +76,18 @@ class MyFavorite extends React.Component {
     return (
       <Container style={styles.container}>
         <Header searchBar style={styles.Header}>
-            <View style={styles.formSearch}>
-              <Item regular>
-                <Input
-                  placeholder="Type Here..."
-                  lightTheme
-                  onChangeText={text => this.searchFilterFunction(text)}
-                />
-                <Icon name='search'
-                  onPress={() => alert('search')} />
-              </Item>
-            </View>
-          </Header>
+          <View style={styles.formSearch}>
+            <Item regular>
+              <Input
+                placeholder="Search Your Anime"
+                lightTheme
+                onChangeText={text => this.searchFilterFunction(text)}
+              />
+              <Icon name='search'
+                onPress={() => alert('search')} />
+            </Item>
+          </View>
+        </Header>
         <Content>
           <View style={styles.formFav}>
             <Text style={styles.title}>Favorite</Text>
@@ -108,8 +102,8 @@ class MyFavorite extends React.Component {
                       <Text>{item.webtoon_id.title}</Text>
                       <Text note numberOfLines={1}>{item.webtoon_id.favorite_count} Favorite</Text>
                     </Body>
-                    <Icon name='star' style={{marginRight: 20,}}
-                    onPress={() => this.deleteFavorite(item.webtoon_id.id) }/>
+                    <Icon name='star' style={{ marginRight: 20, }}
+                      onPress={() => this.deleteFavorite(item.webtoon_id.id)} />
                   </ListItem>
                 </Card>
               }>
@@ -127,11 +121,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f4f4'
   },
   Header: {
-    backgroundColor: '#E3608A',
+    backgroundColor: '#4a3b3b'
   },
   formSearch: {
     marginVertical: 10,
-    width: Dimensions.get('window').width-20
+    width: Dimensions.get('window').width - 20
   },
   formFav: {
     padding: 5

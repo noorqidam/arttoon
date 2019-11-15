@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, AsyncStorage, Image, TouchableOpacity, FlatList } from 'react-native';
 import {
   Container, Content, Body, Item, Button, Input, Icon, List,
   Card, CardItem, Thumbnail, ListItem, Left, Header, Spinner
@@ -56,15 +56,7 @@ class ForYou extends React.Component {
   }
 
   UNSAFE_componentDidMount() {
-    // let image = []
-    // for(let i=0; i < 2; i++){
-    //   image[i]= this.state.data[i].image
-    // }
-    // this.setState({imageBanners: image})
-
     let newData = this.state.data;
-    //newData[idx].isFav = !newData[idx].isFav;
-    // function update favorite list
     newData = this.state.data.filter((item) =>
       item.isFav == true
     );
@@ -77,23 +69,9 @@ class ForYou extends React.Component {
   UNSAFE_componentWillUnmount() {
     clearInterval(this.state.slideInterval);
   }
+
   handleDetail(item) {
     this.props.navigation.navigate('Detail', { webtoon: item })
-  }
-
-  onHandleFavoriteBtn(idx) {
-    let newData = this.state.data;
-    newData[idx].isFav = !newData[idx].isFav;
-    if (newData[idx].favBtnColor == '#ff9c9c') {
-      newData[idx].favBtnColor = '#ff3333'
-    } else if (newData[idx].favBtnColor == '#ff3333') {
-      newData[idx].favBtnColor = '#ff9c9c'
-    }
-    // function update favorite list
-    newData = this.state.data.filter((item) =>
-      item.isFav == true
-    );
-    this.setState({ favorite: newData });
   }
 
   async addFavorite(id) {
@@ -135,6 +113,7 @@ class ForYou extends React.Component {
   }
 
   render() {
+    console.disableYellowBox = true
     if (this.props.webtoonsLocal.isLoading) {
       return (<Spinner />)
     }
@@ -148,25 +127,24 @@ class ForYou extends React.Component {
       }
       return (
         <Container style={styles.container}>
+          <Header searchBar style={styles.Header}>
+            <Item regular>
+              <Input
+                value={this.state.search}
+                placeholder='Search Your Anime'
+                onChangeText={(text) => this.setState({ search: text })}
+              />
+              <Icon name='search' />
+            </Item>
+          </Header>
           <Content>
-            <Header searchBar style={styles.Header}>
-              <Item regular>
-                <Input
-                  value={this.state.search}
-                  onChangeText={(text) => this.setState({ search: text })}
-                />
-                <Icon name='search' />
-              </Item>
-            </Header>
-            <Card
-              style={styles.headerSlide}>
-              <Slideshow height={200}
+            <View style={{ height: 195 }}>
+              <Slideshow
                 dataSource={this.state.data}
                 position={this.state.slidePos}
                 onPositionChanged={position => this.setState({ position })}
               />
-            </Card>
-
+            </View>
             <List>
               <Card bordered style={styles.formFav}>
                 <ListItem itemDivider style={styles.ListDiv}>
@@ -177,15 +155,11 @@ class ForYou extends React.Component {
                   this.props.favoritesLocal.isLoading ? <Spinner /> :
                     <List dataArray={this.state.favorites} horizontal={true}
                       renderRow={(item) =>
-                        <Card>
-                          <CardItem thumbnail bordered style={{ alignContent: 'center' }}>
-                            <Body>
-                              <Button transparent onPress={() => alert('belum')}>
-                                <Thumbnail square source={{ uri: item.webtoon_id.image }} />
-                              </Button>
-                              <Text>{item.webtoon_id.title}</Text>
-                            </Body>
-                          </CardItem>
+                        <Card style={{ width: null, height: null }}>
+                          <TouchableOpacity style={{ backgroundColor: 'red' }} onPress={() => alert('belum')}>
+                            <Image style={{ width: 200, height: 130 }} source={{ uri: item.webtoon_id.image }} />
+                          </TouchableOpacity >
+                          <Text style={{ textAlign: 'center', marginTop: 5 }}>{item.webtoon_id.title}</Text>
                         </Card>
                       }>
                     </List>
@@ -196,6 +170,12 @@ class ForYou extends React.Component {
                 <ListItem itemDivider style={styles.ListDiv}>
                   <Text style={styles.title}>All</Text>
                 </ListItem>
+                {/* <FlatList
+                  numColumns={2}
+                  dataArray={this.props.webtoonsLocal.webtoons.data} horizontal={false}
+                  renderItem={({ item }) => this.listAll(item)}
+                  keyExtractor={item => item.i}
+                /> */}
                 <List
                   dataArray={this.props.webtoonsLocal.webtoons.data} horizontal={false}
                   renderRow={(item, i, index) =>
@@ -238,59 +218,47 @@ class ForYou extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: Dimensions.get('window').width,
-    backgroundColor: '#f5f5f5'//'#F5E027'
-    //height: 500
+
+    // backgroundColor: '#f5f5f5'//'#F5E027'
+    // //height: 500
   },
   Header: {
-    backgroundColor: '#E3608A',
+    backgroundColor: '#4a3b3b',
   },
   headerSlide: {
-    width: Dimensions.get('window').width - 20,
-    alignSelf: 'center',
-    backgroundColor: '#E3608A',
-    borderWidth: 10,
-    borderColor: 'black'
-  },
-  formSearch: {
-    marginVertical: 10
+    // width: Dimensions.get('window').width,
+    // alignSelf: 'center',
+    // borderWidth: 10,
+    // borderColor: 'black',
+    // display: 'cover'
+    height: 250
   },
   formFav: {
     alignSelf: 'center',
     backgroundColor: '#f5f5f5',
-    width: Dimensions.get('window').width - 20,
+    width: Dimensions.get('window').width,
+    height: 230,
     borderWidth: .2,
     borderColor: 'black'
   },
   formAll: {
     alignSelf: 'center',
-    width: Dimensions.get('window').width - 20,
+    width: Dimensions.get('window').width,
     backgroundColor: '#f4f4f4',
     borderWidth: .2,
     borderColor: 'black'
   },
   title: {
-    height: 22,
-    fontSize: 20,
+    fontSize: 22,
     color: 'white',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: { width: -1, height: 1 },
-    textShadowRadius: 10
-  },
-  Slideshow: {
-    width: Dimensions.get('window').width - 40,
-
-  },
-  favBtn: {
+    fontWeight: 'bold'
   },
   ListDiv: {
-    backgroundColor: '#E3608A',
+    backgroundColor: '#4a3b3b',
     borderWidth: .2,
-    borderColor: 'black'
-
+    borderColor: 'black',
   }
 })
-
 
 const mapStateToProps = state => {
   return {

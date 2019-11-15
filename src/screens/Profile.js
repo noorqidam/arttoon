@@ -12,7 +12,7 @@ export default class Profile extends Component {
     this.state = {
       account: {
         name: 'Your name',
-        image: 'https://s.kaskus.id/images/2017/02/27/2153697_20170227015800.jpg'
+        image: ''
       },
     }
   }

@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 import { Container, Header, Left, Body, Right, Button, Icon, Title, Content } from 'native-base';
 
 import { connect } from 'react-redux'
-//import * as actionTodos from './../redux/actions/actionTodos'
 import * as actionImages from './../redux/actions/actionImages'
 
 class DetailEpisode extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -20,9 +18,9 @@ class DetailEpisode extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    const webtoonId= this.props.navigation.state.params.webtoon
-    const episode= this.props.navigation.state.params.episode.id
-    this.props.handleGetImages(webtoonId,episode)
+    const webtoonId = this.props.navigation.state.params.webtoon
+    const episode = this.props.navigation.state.params.episode.id
+    this.props.handleGetImages(webtoonId, episode)
 
     if (this.props.imagesLocal.images.isSuccess) {
       this.setState({ data: this.props.imagesLocal.images.data })
@@ -61,7 +59,7 @@ class DetailEpisode extends Component {
           </Body>
           <Right>
             <Button transparent>
-              <Icon name='share-alt'
+              <Icon name='share'
                 onPress={() => this.onClick()} />
             </Button>
           </Right>
@@ -71,7 +69,6 @@ class DetailEpisode extends Component {
             <FlatList
               data={this.props.imagesLocal.images.data}
               renderItem={({ item }) =>
-
                 <Image
                   style={styles.imageForm}
                   source={{ uri: item.image }} />
@@ -103,7 +100,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 10
   },
   Header: {
-    backgroundColor: '#E3608A',
+    backgroundColor: '#4a3b3b',
   },
 })
 
@@ -116,7 +113,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleGetImages: (webtoonId,episode) => dispatch(actionImages.handleGetImages(webtoonId,episode))
+    handleGetImages: (webtoonId, episode) => dispatch(actionImages.handleGetImages(webtoonId, episode))
   }
 }
 

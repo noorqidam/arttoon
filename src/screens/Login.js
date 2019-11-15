@@ -1,19 +1,19 @@
 import React from 'react';
 import { SafeAreaView, View, Text, StyleSheet, Dimensions, AsyncStorage, Image, ImageBackground } from 'react-native';
-import { Item, Input, Button, Icon, Container } from 'native-base';
-const Logo = require('./../images/logoPositiveToon.png');
-const Backgound = require('./../images/background2.jpeg');
+import { Item, Input, Button, Icon, Container, Card } from 'native-base';
 
 import { connect } from 'react-redux'
 import * as actionUsers from './../redux/actions/actionUsers'
+import Icon1 from 'react-native-vector-icons/Octicons';
+import Icon2 from 'react-native-vector-icons/AntDesign';
 
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'admin@gmail.com',
-      password: 'rahasia',
+      email: 'noorqidam@gmail.com',
+      password: '1234',
       icon: 'eye-off',
       passMode: true
     };
@@ -63,11 +63,6 @@ class Login extends React.Component {
 
   }
 
-  demo() {
-    this.setState({ password: 'rahasia' })
-    this.setState({ email: 'admin@gmail.com' })
-  }
-
   async passLogin() {
     const token = await AsyncStorage.getItem('token');
     if (token !== null) {
@@ -85,23 +80,23 @@ class Login extends React.Component {
     const { label, icon, onChange } = this.props;
     return (
       <Container style={styles.container}>
-        <ImageBackground source={Backgound}
-        style={{width: Dimensions.get('window').width, height: Dimensions.get('window').height}}>
-          <SafeAreaView>
-            <View style={styles.form}>
-              <View style={styles.marginTitle}>
-                <Image
-                  source={Logo}
-                  style={{ height: 200, width: 200 }} />
-                <Text style={styles.subTitle}>Login with your account</Text>
-              </View>
-              <View>
+        <SafeAreaView>
+          <View>
+
+            <Image
+              source={require('../images/logo.png')}
+              style={styles.logo} />
+            <Text style={styles.subTitle}>Login with your account</Text>
+
+            <Card style={styles.card}>
+              <View style={styles.contentCard}>
                 <Text style={styles.text}>Email</Text>
                 <Item regular
                   style={styles.formItem}>
+                  <Icon1 name='mail' style={styles.iconInput} />
                   <Input
+                    style={styles.formInput}
                     value={this.state.email}
-
                     onChangeText={(text) => this.setState({ email: text })}
                     autoCapitalize='none'
                     keyboardType='email-address' />
@@ -109,25 +104,29 @@ class Login extends React.Component {
                 <Text style={styles.text}>Password</Text>
                 <Item regular
                   style={styles.formItem}>
+                  <Icon2 name='lock1' style={styles.iconInput} />
                   <Input
+                    style={styles.formInput}
                     secureTextEntry={this.state.passMode}
                     value={this.state.password}
                     onChangeText={(text) => this.setState({ password: text })}
                     keyboardType='default' />
                   <Icon name={this.state.icon} onPress={() => this.modeIcon()} />
                 </Item>
-                <Button block rounded style={styles.Button}
+                <Button block
+                  style={styles.btnLogin}
                   onPress={() => this.validate(this.state.email)}>
-                  <Text style={{ color: '#ffffff' }}>Login</Text></Button>
-                <Item style={styles.Text}>
-                  <Text style={styles.text}>don't have an account yet </Text>
+                  <Text style={styles.txtLogin}>Log In</Text>
+                </Button>
+                <View style={styles.link}>
+                  <Text style={styles.text}>Don't have an account yet </Text>
                   <Text style={styles.TextMode}
-                    onPress={() => this.props.navigation.navigate('Register')}> Register</Text>
-                </Item>
+                    onPress={() => this.props.navigation.navigate('Register')}>Sign Up</Text>
+                </View>
               </View>
-            </View>
-          </SafeAreaView>
-        </ImageBackground>
+            </Card>
+          </View>
+        </SafeAreaView>
       </Container>
     );
   }
@@ -135,70 +134,69 @@ class Login extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
     width: Dimensions.get('window').width,
-    //backgroundColor: 'skyblue'
-  },
-  form: {
-    width: Dimensions.get('window').width,
-    paddingHorizontal: 15,
-    alignSelf: 'center'
+    paddingHorizontal: 10,
+    backgroundColor: '#4a3b3b'
   },
   marginTitle: {
     alignItems: 'center',
     padding: 10
   },
-  marginSubTitle: {
-    marginTop: 80,
-    marginBottom: 60,
+  logo: {
+    height: 300,
+    width: 400
   },
   title: {
     fontSize: 50
   },
-  text: {
-    //color: 'white',
-    color: 'white',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
-  },
   subTitle: {
-    fontSize: 20,
-    color: 'white',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
+    fontSize: 23,
+    fontWeight: 'bold',
+    color: '#ffffff',
+    alignSelf: 'center'
   },
-  box: {
-    //borderColor: 'white',
-
+  text: {
+    color: 'black',
+  },
+  card: {
+    borderRadius: 20,
+    width: '90%',
+    height: '42%',
+    marginLeft: 20,
+    marginTop: 50
+  },
+  contentCard: {
+    width: '90%',
+    marginHorizontal: 20,
+    padding: 10
+  },
+  iconInput: {
+    fontSize: 20,
+    marginLeft: 10,
   },
   formItem: {
     marginBottom: 10,
-    backgroundColor: '#FAAE00',
-    opacity: 0.9,
-    borderWidth: 2,
     borderColor: 'black'
-    //borderColor: 'white'
+  },
+  formInput: {
+    width: 90,
+  },
+  btnLogin: {
+    backgroundColor: '#00918e',
+    borderRadius: 8,
+    marginVertical: 5
+  },
+  txtLogin: {
+    color: '#ffffff',
+    fontWeight: 'bold'
   },
   TextMode: {
     color: 'blue',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
   },
-  Text: {
+  link: {
+    flexDirection: 'row',
     marginTop: 20,
     alignSelf: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10
-    
-  },
-  Button: {
-    backgroundColor: '#E4353A',
-    borderWidth: .5,
-    borderColor: 'black' 
   }
 })
 
