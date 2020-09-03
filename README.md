@@ -50,9 +50,9 @@ This project is still on very early development stage. If you want to use for pr
 ## Prerequisites
 * Make sure You had been install NodeJs in your system https://nodejs.org/
 * Then install React Native https://facebook.github.io/react-native/
-* Then install React Native https://docs.nativebase.io/
-* Then install React Native Navigation https://facebook.github.io/react-native/docs/0.60/navigation
-* Then install React Native https://redux.js.org/
+* Then install Native Base https://docs.nativebase.io/
+* Then install React Navigation https://facebook.github.io/react-native/docs/0.60/navigation
+* Then install Redux https://redux.js.org/
 * Then install image-picker https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Install.md
 * Then install image-slider-show https://www.npmjs.com/package/react-native-image-slider-show
 * Don’t forget Node Js as the backend https://nodejs.org/en/
@@ -86,4 +86,4 @@ $ express #run your express on http://localhost:3000
 
 ## Contact 
 * WA/TELEGRAM: +62 8577 1603 597
-* email: noorqidam@gmail.id
+* email: noorqidam@gmail.com
